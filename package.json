@@ -1,0 +1,25 @@
+{
+  "name": "front-boilerplate-uix-tailwind",
+  "version": "1.0.0",
+  "description": "An example project using UIx with Tailwind CSS",
+  "scripts": {
+    "ci-test": "shadow-cljs compile ci-test && karma start --single-run",
+    "dev": "shadow-cljs watch app test",
+    "release": "shadow-cljs release app"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "use-sync-external-store": "1.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "daisyui": "^5.0.43",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-cljs-test": "^0.1.0",
+    "react-refresh": "^0.17.0",
+    "shadow-cljs": "^3.1.7",
+    "tailwindcss": "^4.1.11"
+  }
+}

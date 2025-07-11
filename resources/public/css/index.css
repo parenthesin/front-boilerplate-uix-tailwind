@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@source "../../../src/parenthesin/front_boilerplate/**/*.{clj,cljs,cljc}";
+
+@plugin "daisyui" {
+  themes: caramellatte --default, abyss --prefersdark;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input,
+textarea {
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+pre {
+  all: revert;
+}
+
+/***
+* Using Tailwind CSS all heading elements are completely unstyled by default
+* See more here: https://tailwindcss.com/docs/preflight#headings-are-unstyled
+***/
+h1 {
+  @apply text-4xl;
+  @apply font-bold;
+}
+
+h2 {
+  @apply text-3xl;
+  @apply font-bold;
+}
+
+h3 {
+  @apply text-2xl;
+  @apply font-bold;
+}
+
+h4 {
+  @apply text-xl;
+  @apply font-semibold;
+}
+
+h5 {
+  @apply text-lg;
+  @apply font-semibold;
+}
+
+h6 {
+  @apply text-base;
+  @apply font-semibold;
+}
+
+a {
+  @apply underline;
+}

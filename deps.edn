@@ -1,0 +1,9 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.1"}
+        org.clojure/clojurescript {:mvn/version "1.12.42"}
+        com.pitch/uix.core {:mvn/version "1.4.4"}
+        com.pitch/uix.dom {:mvn/version "1.4.4"}}
+ :aliases {:dev {:extra-paths ["test"]
+                 :extra-deps {thheller/shadow-cljs {:mvn/version "3.1.7"}
+                              binaryage/devtools {:mvn/version "1.0.7"}
+                              com.teknql/shadow-cljs-tailwind-jit {:mvn/version "1.0.0"}}}}}
