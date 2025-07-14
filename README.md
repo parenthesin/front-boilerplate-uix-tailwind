@@ -7,11 +7,11 @@ Minimal uix and tailwind example, with shadow-cljs (and daisyUI for css componen
 # Install dependencies
 npm i
 
-# Start application with shadow
-npm run dev
+# Start application with shadow (app + portfolio + tests)
+npm start
 
 # Run CI tests
-npm run ci-test
+npm test
 
 # Release the final version
 npm run release

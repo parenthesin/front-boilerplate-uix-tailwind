@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "An example project using UIx with Tailwind CSS",
   "scripts": {
-    "ci-test": "shadow-cljs compile ci-test && karma start --single-run",
-    "dev": "shadow-cljs watch app test",
+    "start": "shadow-cljs watch app test portfolio",
+    "test": "shadow-cljs compile ci-test && karma start --single-run",
     "release": "shadow-cljs release app"
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "snabbdom": "3.5.1",
     "use-sync-external-store": "1.5.0"
   },
   "devDependencies": {
