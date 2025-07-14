@@ -1,6 +1,6 @@
 {:deps {:aliases [:dev]}
  :dev-http {5000 ["resources/public"]
-            5001 ["resources/public/portfolio" "classpath:public"]
+            5001 ["resources/public/portfolio" "resources/public" "classpath:public"]
             5002 ["resources/public/test"]}
  :builds {:app {:target          :browser
                 :output-dir      "resources/public/js"
@@ -12,15 +12,15 @@
                 :tailwind/files  {:base-path "."
                                   :tailwind.css "resources/public/css/index.css"}}
 
-          :portfolio {:target :browser
+          :portfolio {:target     :browser
                       :output-dir "resources/public/portfolio"
                       :asset-path "/portfolio"
-                      :modules {:main {:init-fn parenthesin.portfolio.core/init}}}
+                      :modules    {:main {:init-fn parenthesin.portfolio.core/init}}}
 
           :test {:target    :browser-test
                  :test-dir  "resources/public/test"
                  :ns-regexp "-test$"}
 
-          :ci-test {:target :karma
+          :ci-test {:target    :karma
                     :output-to "resources/public/test/ci.js"
                     :ns-regexp "-test$"}}}

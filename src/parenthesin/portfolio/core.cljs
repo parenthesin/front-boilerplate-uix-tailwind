@@ -5,4 +5,4 @@
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn init
   []
-  (ui/start!))
+  (ui/start! {:config {:css-paths ["/css/bundle.css"]}}))
