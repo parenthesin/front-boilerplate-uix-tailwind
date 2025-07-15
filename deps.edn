@@ -1,8 +1,14 @@
 {:paths ["src"]
  :deps {org.clojure/clojure {:mvn/version "1.12.1"}
         org.clojure/clojurescript {:mvn/version "1.12.42"}
-        com.pitch/uix.core {:mvn/version "1.4.4"}
-        com.pitch/uix.dom {:mvn/version "1.4.4"}}
+        com.pitch/uix.core {:git/url "https://github.com/pitch-io/uix.git"
+                            :deps/root "core"
+                            :git/sha "2370a4adc3af68d67a616ce59e2eadfdd175c67a"}
+        com.pitch/uix.dom {:git/url "https://github.com/pitch-io/uix.git"
+                           :deps/root "dom"
+                           :git/sha "2370a4adc3af68d67a616ce59e2eadfdd175c67a"}
+        lambdaisland/fetch {:mvn/version "1.5.83"}
+        funcool/promesa {:mvn/version "11.0.678"}}
  :aliases {:dev {:extra-paths ["dev" "test"]
                  :extra-deps {no.cjohansen/portfolio {:mvn/version "2025.01.28"}
                               thheller/shadow-cljs {:mvn/version "3.1.7"}

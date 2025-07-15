@@ -15,3 +15,6 @@
 
 (defscene shell-navbar
   ($ components/navbar))
+
+(defscene shell-footer
+  ($ components/footer))
