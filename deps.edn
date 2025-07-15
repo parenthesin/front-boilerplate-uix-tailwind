@@ -3,7 +3,7 @@
         org.clojure/clojurescript {:mvn/version "1.12.42"}
         com.pitch/uix.core {:mvn/version "1.4.4"}
         com.pitch/uix.dom {:mvn/version "1.4.4"}}
- :aliases {:dev {:extra-paths ["test"]
+ :aliases {:dev {:extra-paths ["dev" "test"]
                  :extra-deps {no.cjohansen/portfolio {:mvn/version "2025.01.28"}
                               thheller/shadow-cljs {:mvn/version "3.1.7"}
                               binaryage/devtools {:mvn/version "1.0.7"}

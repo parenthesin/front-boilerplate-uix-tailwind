@@ -15,7 +15,7 @@
           :portfolio {:target     :browser
                       :output-dir "resources/public/portfolio"
                       :asset-path "/portfolio"
-                      :modules    {:main {:init-fn parenthesin.portfolio.core/init}}}
+                      :modules    {:main {:init-fn portfolio.core/init}}}
 
           :test {:target    :browser-test
                  :test-dir  "resources/public/test"

@@ -1,4 +1,4 @@
-(ns parenthesin.portfolio.scenes.shell
+(ns portfolio.scenes.shell
   (:require [parenthesin.front-boilerplate.panels.shell.components :as components]
             [portfolio.react-18 :refer-macros [defscene]]
             [uix.core :as uix :refer [$ defui]]))
@@ -15,11 +15,3 @@
 
 (defscene shell-navbar
   ($ components/navbar))
-
-;
-; (defscene component-boolean-true
-;   (d/div (d/h1 "helix-jsdom")
-;          ($ c/component-boolean {:value true})))
-;
-; (defscene component-boolean-false
-;   ($ c/component-boolean {:value false}))
