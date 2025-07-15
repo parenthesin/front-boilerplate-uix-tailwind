@@ -4,5 +4,7 @@
 /.shadow-cljs
 /node_modules
 /resources/public/js/*
+/resources/public/portfolio/*
+!/resources/public/portfolio/index.html
 /resources/public/css/bundle.css
 /resources/public/test/*
