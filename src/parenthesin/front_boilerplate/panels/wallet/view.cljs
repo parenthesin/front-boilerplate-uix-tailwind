@@ -1,27 +1,15 @@
 (ns parenthesin.front-boilerplate.panels.wallet.view
-  (:require
-   [parenthesin.front-boilerplate.infra.http :as http]
-   [parenthesin.front-boilerplate.panels.wallet.components :refer [wallet-entries]]
-   [uix.core :as uix :refer [$ defui]]
-   [uix.dom]))
-
-;; todo: arrumar essa abobra
-(defn parse-data-blablabla [data]
-  (let [entries (map (fn [entry]
-                       {:id (:id entry)
-                        :btc-amount (.-rep ^js (:btc-amount entry))
-                        :usd-amount-at (.-rep ^js (:usd-amount-at entry))
-                        :created-at (.toDateString (new js/Date (:created-at entry)))})
-                     (:entries data))]
-    (assoc data :entries entries)))
-
-(defn get-wallet-history [set-wallet-history]
-  (-> (http/request! {:path "wallet/history"
-                      :method :get})
-      (.then (fn [e] (set-wallet-history (parse-data-blablabla (:body e)))))
-      (.catch #(prn "request to get entries! catch: " %))))
+  (:require [parenthesin.front-boilerplate.panels.wallet.components :refer [bottom-bar wallet-entries]]
+            [parenthesin.front-boilerplate.panels.wallet.state :refer [get-wallet-history]]
+            [uix.core :as uix :refer [$ defui]]
+            [uix.dom]))
 
 (defui app-wallet [_]
-  (let [[wallet-history set-wallet-history] (uix/use-state nil)
-        _ (get-wallet-history set-wallet-history)]
-    ($ wallet-entries {:entries (:entries wallet-history)})))
+  (let [[wallet-history set-wallet-history] (uix/use-state nil)]
+    (get-wallet-history set-wallet-history)
+    ($ :div
+       ($ :h1.text-2xl.font-bold.mb-4 "BTC Wallet")
+       ($ :p.mb-4 "This is the history of your transactions.")
+       ($ wallet-entries wallet-history)
+       ($ bottom-bar {:on-click #(get-wallet-history set-wallet-history)
+                      :wallet-history wallet-history}))))

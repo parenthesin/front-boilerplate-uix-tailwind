@@ -18,3 +18,20 @@
                 ($ :td (str btc-amount " BTC"))
                 ($ :td (str "US$ " usd-amount-at))
                 ($ :td (str created-at))))))))
+
+(defui refresh-button [{:keys [on-click]}]
+  ($ :div.p-4
+     ($ :button.btn.btn-primary
+        {:on-click on-click}
+        "Refresh")))
+
+(defui total-values [{:keys [total-btc total-current-usd]}]
+  ($ :div.p-4
+     ($ :span.text-lg.font-bold
+        (str "Total Values: BTC " total-btc
+             "| US$ " total-current-usd))))
+
+(defui bottom-bar [{:keys [on-click wallet-history]}]
+  ($ :.flex.justify-between
+     ($ refresh-button {:on-click on-click})
+     ($ total-values wallet-history)))
