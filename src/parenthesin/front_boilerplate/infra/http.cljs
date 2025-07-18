@@ -3,7 +3,7 @@
             [parenthesin.front-boilerplate.infra.system.state :as system.state]))
 
 (defn request! [request-input]
-  (http.component/request (:http @system.state/components) request-input))
+  (http.component/request (:http @system.state/system) request-input))
 
 (comment
   ;; base test component request

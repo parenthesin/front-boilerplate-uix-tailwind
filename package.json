@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.11",
+    "@testing-library/react": "^16.3.0",
     "daisyui": "^5.0.43",
     "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.2.0",

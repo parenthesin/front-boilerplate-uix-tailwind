@@ -4,6 +4,7 @@
 
 (defui wallet-entries [{:keys [entries]}]
   ($ :.overflow-x-auto.rounded-box.border.border-base-content.bg-base-100
+     {:data-testid "wallet-entries-component"}
      ($ :table.table
         ($ :thead
            ($ :tr
