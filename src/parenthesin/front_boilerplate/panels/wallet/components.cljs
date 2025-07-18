@@ -22,17 +22,20 @@
 
 (defui refresh-button [{:keys [on-click]}]
   ($ :div.p-4
+     {:data-testid "refresh-button-component"}
      ($ :button.btn.btn-primary
         {:on-click on-click}
         "Refresh")))
 
 (defui total-values [{:keys [total-btc total-current-usd]}]
   ($ :div.p-4
+     {:data-testid "total-values-component"}
      ($ :span.text-lg.font-bold
         (str "Total Values: BTC " total-btc
              "| US$ " total-current-usd))))
 
 (defui bottom-bar [{:keys [on-click wallet-history]}]
   ($ :.flex.justify-between
+     {:data-testid "bottom-bar-component"}
      ($ refresh-button {:on-click on-click})
      ($ total-values wallet-history)))

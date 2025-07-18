@@ -8,6 +8,7 @@
   (let [[wallet-history set-wallet-history] (uix/use-state nil)]
     (get-wallet-history set-wallet-history)
     ($ :div
+       {:data-testid "app-wallet-view"}
        ($ :h1.text-2xl.font-bold.mb-4 "BTC Wallet")
        ($ :p.mb-4 "This is the history of your transactions.")
        ($ wallet-entries wallet-history)
