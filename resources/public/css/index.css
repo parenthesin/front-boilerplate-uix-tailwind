@@ -2,7 +2,7 @@
 @source "../../../src/parenthesin/front_boilerplate/**/*.{clj,cljs,cljc}";
 
 @plugin "daisyui" {
-  themes: caramellatte --default, abyss --prefersdark;
+  themes: light --default, dark --prefersdark;
 }
 
 /* Remove list styles (bullets/numbers) */

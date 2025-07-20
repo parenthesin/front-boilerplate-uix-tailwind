@@ -4,6 +4,8 @@
 
 (defn get-wallet-history [set-wallet-history]
   (-> (http/request! {:path "wallet/history"
-                      :method :get})
+                      :method :get
+                      :accept :json
+                      :content-type :json})
       (.then (fn [e] (set-wallet-history (adapters/->wallet-entries (:body e)))))
       (.catch #(prn "request to get entries! catch: " %))))

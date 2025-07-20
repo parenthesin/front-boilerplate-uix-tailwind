@@ -3,12 +3,12 @@
             [parenthesin.front-boilerplate.panels.wallet.adapters :as adapters]
             [parenthesin.front-boilerplate.test.aux.fixtures.wallet :as fixtures.wallet]))
 
-(deftest ->wallet-entry-test
+(deftest ->wallet-entries-test
   (testing "Normal data convertion"
     (is (= {:entries [{:id 1
                        :btc-amount 1
-                       :usd-amount-at 30000M
+                       :usd-amount-at "30000.00"
                        :created-at "Wed Jan 01 2025"}]
             :total-btc 1
-            :total-current-usd 30000M}
+            :total-current-usd "30000.00"}
            (adapters/->wallet-entries fixtures.wallet/unparsed-wallet-entry)))))

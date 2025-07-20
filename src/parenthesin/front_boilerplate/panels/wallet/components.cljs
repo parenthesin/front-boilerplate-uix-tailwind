@@ -14,11 +14,15 @@
               ($ :th "Created At")))
         ($ :tbody
            (for [{:keys [id btc-amount usd-amount-at created-at]} entries]
-             ($ :tr {:key id}
-                ($ :td (str id))
-                ($ :td (str btc-amount " BTC"))
-                ($ :td (str "US$ " usd-amount-at))
-                ($ :td (str created-at))))))))
+             (let [deposit (< 0 btc-amount)]
+               ($ :tr {:key id
+                       :className (if deposit
+                                    "bg-primary text-primary-content"
+                                    "bg-secondary text-secondary-content")}
+                  ($ :td (str id))
+                  ($ :td (str btc-amount " BTC"))
+                  ($ :td (str "US$ " usd-amount-at))
+                  ($ :td (str created-at)))))))))
 
 (defui refresh-button [{:keys [on-click]}]
   ($ :div.p-4
