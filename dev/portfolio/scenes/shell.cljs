@@ -9,12 +9,15 @@
        ($ :p "Count: " count)
        ($ :button.btn.btn-warning {:on-click #(set-count inc)} "Increase"))))
 
-(defscene helix-counter
+(defscene uix-counter
   :title "Counter with React Hooks"
   ($ counter))
 
-(defscene shell-navbar
-  ($ components/navbar))
+(defscene shell-navbar-with-dark-mode
+  ($ components/navbar {:dark-mode true}))
 
-(defscene shell-footer
-  ($ components/footer))
+(defscene shell-navbar-with-light-mode
+  ($ components/navbar {:dark-mode false}))
+
+(defscene shell-footer-with-dark-mode
+  ($ components/footer {:dark-mode true}))

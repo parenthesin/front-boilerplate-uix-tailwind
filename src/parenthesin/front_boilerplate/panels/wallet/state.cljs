@@ -2,10 +2,12 @@
   (:require [parenthesin.front-boilerplate.infra.http :as http]
             [parenthesin.front-boilerplate.panels.wallet.adapters :as adapters]))
 
-(defn get-wallet-history [set-wallet-history]
+(defn get-wallet-history [set-wallet-history set-loading]
   (-> (http/request! {:path "wallet/history"
                       :method :get
                       :accept :json
                       :content-type :json})
-      (.then (fn [e] (set-wallet-history (adapters/->wallet-entries (:body e)))))
+      (.then (fn [e]
+               (set-loading false)
+               (set-wallet-history (adapters/->wallet-entries (:body e)))))
       (.catch #(prn "request to get entries! catch: " %))))
