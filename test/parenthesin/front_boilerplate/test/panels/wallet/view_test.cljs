@@ -41,20 +41,18 @@
 
             (testing "wallet entries table should render correctly"
               (is (match? "table" (-> table-element (aget "className"))))
-              (is (match? 4 (-> table-headers (aget "length"))))
-              (is (match? "ID" (-> table-headers (aget 0) (.-textContent))))
-              (is (match? "BTC Amount" (-> table-headers (aget 1) (.-textContent))))
-              (is (match? "USD Amount At" (-> table-headers (aget 2) (.-textContent))))
-              (is (match? "Created At" (-> table-headers (aget 3) (.-textContent))))
+              (is (match? 3 (-> table-headers (aget "length"))))
+              (is (match? "BTC Amount" (-> table-headers (aget 0) (.-textContent))))
+              (is (match? "USD Amount At" (-> table-headers (aget 1) (.-textContent))))
+              (is (match? "Created At" (-> table-headers (aget 2) (.-textContent))))
               (is (< 0 (-> table-rows (aget "length")))))
 
             (testing "table data should match fixture data"
               (let [first-row (aget table-rows 0)
                     row-cells (-> first-row (.querySelectorAll "td"))]
-                (is (match? "ID" (-> row-cells (aget 0) (.-textContent))))
-                (is (str/includes? (-> row-cells (aget 1) (.-textContent)) "BTC"))
-                (is (str/includes? (-> row-cells (aget 2) (.-textContent)) "US$"))
-                (is (str/includes? (-> row-cells (aget 3) (.-textContent)) "Wed Jan 01 2025"))))
+                (is (str/includes? (-> row-cells (aget 0) (.-textContent)) "BTC"))
+                (is (str/includes? (-> row-cells (aget 1) (.-textContent)) "US$"))
+                (is (str/includes? (-> row-cells (aget 2) (.-textContent)) "Wed Jan 01 2025"))))
 
             (testing "bottom bar components should render correctly"
               (is (match? "btn btn-primary" (-> refresh-button-component (aget "className"))))

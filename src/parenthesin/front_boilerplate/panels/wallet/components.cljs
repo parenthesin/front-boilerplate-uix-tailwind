@@ -8,12 +8,11 @@
      ($ :span.loading.loading-spinner.loading-xl)))
 
 (defui wallet-entries [{:keys [entries]}]
-  ($ :div {:className "rounded-box border border-base-content bg-base-100"
+  ($ :div {:className "bg-base-100"
            :data-testid "wallet-entries-component"}
      ($ :table.table
         ($ :thead
            ($ :tr
-              ($ :th "ID")
               ($ :th "BTC Amount")
               ($ :th "USD Amount At")
               ($ :th "Created At")))
@@ -21,13 +20,10 @@
            (for [{:keys [id btc-amount usd-amount-at created-at]} entries]
              (let [withdrawal (> 0 btc-amount)]
                ($ :tr {:key id
-                       :className (when withdrawal "bg-base-300")}
+                       :className (str "hover:bg-base-200" (when withdrawal " bg-base-300"))}
                   ($ :td ($ :div {:className "tooltip"
-                                  :data-tip id}
-                            ($ :button {:className "btn"
-                                        :on-click #(js/navigator.clipboard.writeText id)}
-                               ($ :span "ID"))))
-                  ($ :td (str btc-amount " BTC"))
+                                  :data-tip (str "ID: " id)}
+                            (str btc-amount " BTC")))
                   ($ :td (str "US$ " usd-amount-at))
                   ($ :td (str created-at)))))))))
 

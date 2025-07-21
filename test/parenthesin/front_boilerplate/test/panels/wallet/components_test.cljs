@@ -42,7 +42,7 @@
                   created-at-item (-> rendered-component (.getByText "Wed Jan 01 2025"))]
 
             (testing "wallet entries component should render with correct classes"
-              (is (match? "rounded-box border border-base-content bg-base-100"
+              (is (match? "bg-base-100"
                           (-> wallet-entries-component
                               (aget "className")))))
 
