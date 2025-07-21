@@ -1,10 +1,7 @@
 (ns parenthesin.front-boilerplate.panels.wallet.view
   (:require [parenthesin.front-boilerplate.components.alert :as components.alert]
-            [parenthesin.front-boilerplate.panels.wallet.components :refer [bottom-bar
-                                                                            loading-spinner
-                                                                            wallet-entries]]
-            [parenthesin.front-boilerplate.panels.wallet.state :refer [db
-                                                                       get-wallet-history]]
+            [parenthesin.front-boilerplate.panels.wallet.components :refer [bottom-bar loading-spinner wallet-entries]]
+            [parenthesin.front-boilerplate.panels.wallet.state :refer [db get-wallet-history]]
             [uix.core :as uix :refer [$ defui]]
             [uix.dom]))
 
