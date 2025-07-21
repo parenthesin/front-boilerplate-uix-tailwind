@@ -31,21 +31,11 @@
      ($ :div.flex.gap-2
         ($ theme-toggle {:dark-mode dark-mode
                          :set-dark-mode set-dark-mode})
-        ($ :div.dropdown.dropdown-end
-           ($ :div {:tabIndex 0
-                    :role "button"
-                    :className "btn btn-ghost btn-circle avatar"}
-              ($ :div.w-10.rounded-full
-                 ($ :img {:alt "Meme Avatar"
-                          :src "https://i.redd.it/8ch0hraejyhe1.jpeg"})))
-           ($ :ul {:tabIndex 0
-                   :className "menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"}
-              ($ :li
-                 ($ :a {:href "https://uix-cljs.dev" :target "_blank"}
-                    "UIx"
-                    ($ :span.badge "React!")))
-              ($ :li
-                 ($ :a {:href "https://github.com/parenthesin" :target "_blank"} "Source Code")))))))
+        ($ :div {:role "button"
+                 :className "btn btn-ghost btn-circle avatar"}
+           ($ :div.w-10.rounded-full
+              ($ :img {:alt "Meme Avatar"
+                       :src "https://i.redd.it/8ch0hraejyhe1.jpeg"}))))))
 
 (defui parenthesin-svg [{:keys [dark-mode]}]
   ($ :svg
@@ -64,4 +54,8 @@
         ($ parenthesin-svg {:dark-mode dark-mode})
         ($ :p.font-bold
            "Providing reliable parentheses since 2019")
-        ($ :p "Public Domain - No rights reserved"))))
+        ($ :p "Public Domain - No rights reserved")
+        ($ :a {:className "link link-hover"
+               :href "https://github.com/parenthesin/front-boilerplate-uix-tailwind"
+               :target "_blank"}
+           "Source Code"))))
