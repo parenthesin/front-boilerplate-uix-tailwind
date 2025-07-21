@@ -37,6 +37,10 @@
               ($ :img {:alt "Meme Avatar"
                        :src "https://i.redd.it/8ch0hraejyhe1.jpeg"}))))))
 
+(defui content [{:keys [children]}]
+  ($ :div.flex-grow
+     children))
+
 (defui parenthesin-svg [{:keys [dark-mode]}]
   ($ :svg
      {:width "221"
@@ -54,8 +58,8 @@
         ($ parenthesin-svg {:dark-mode dark-mode})
         ($ :p.font-bold
            "Providing reliable parentheses since 2019")
-        ($ :p "Public Domain - No rights reserved")
-        ($ :a {:className "link link-hover"
-               :href "https://github.com/parenthesin/front-boilerplate-uix-tailwind"
-               :target "_blank"}
-           "Source Code"))))
+        ($ :p "Public Domain - No rights reserved - "
+           ($ :a {:className "link"
+                  :href "https://github.com/parenthesin/front-boilerplate-uix-tailwind"
+                  :target "_blank"}
+              "Source Code")))))

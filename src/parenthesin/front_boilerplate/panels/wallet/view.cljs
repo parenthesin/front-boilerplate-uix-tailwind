@@ -8,8 +8,9 @@
   (let [[loading set-loading] (uix/use-state true)
         [wallet-history set-wallet-history] (uix/use-state nil)]
     (get-wallet-history set-wallet-history set-loading)
-    ($ :div {:data-testid "app-wallet-view"}
-       ($ :h1.text-2xl.font-bold.mb-4.mt-6 "BTC Wallet")
+    ($ :div {:className "px-6 py-10"
+             :data-testid "app-wallet-view"}
+       ($ :h1.text-2xl.font-bold.mb-4 "BTC Wallet")
        ($ :p.mb-4 "This is the history of your transactions.")
        (if loading
          ($ loading-spinner)

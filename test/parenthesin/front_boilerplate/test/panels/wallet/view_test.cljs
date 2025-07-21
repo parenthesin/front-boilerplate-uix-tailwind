@@ -34,7 +34,7 @@
                   total-span (-> total-values (.querySelector "span"))]
 
             (testing "app wallet view should render with correct structure"
-              (is (match? "text-2xl font-bold mb-4 mt-6" (-> title-element (aget "className"))))
+              (is (match? "text-2xl font-bold mb-4" (-> title-element (aget "className"))))
               (is (match? "mb-4" (-> description-element (aget "className"))))
               (is (match? "BTC Wallet" (-> title-element (.-textContent))))
               (is (match? "This is the history of your transactions." (-> description-element (.-textContent)))))

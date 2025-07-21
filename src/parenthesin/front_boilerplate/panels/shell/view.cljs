@@ -19,5 +19,5 @@
     ($ :div.container.lg:mx-auto.lg:max-w-screen-lg.px-4.max-w-screen-sm.flex.flex-col.min-h-screen
        ($ components/navbar {:dark-mode dark-mode
                              :set-dark-mode set-dark-mode})
-       ($ app-wallet)
+       ($ components/content ($ app-wallet))
        ($ components/footer {:dark-mode dark-mode}))))
