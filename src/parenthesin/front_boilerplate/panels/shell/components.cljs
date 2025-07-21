@@ -59,8 +59,7 @@
          :fill (if dark-mode "white" "black")})))
 
 (defui footer [{:keys [dark-mode]}]
-  ($ :footer
-     {:className "footer footer-horizontal footer-center p-10"}
+  ($ :footer.footer.footer-horizontal.footer-center.p-10
      ($ :aside
         ($ parenthesin-svg {:dark-mode dark-mode})
         ($ :p.font-bold

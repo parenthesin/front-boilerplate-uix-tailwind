@@ -5,16 +5,13 @@
             [parenthesin.front-boilerplate.panels.wallet.view :as view]
             [parenthesin.front-boilerplate.test.aux.fixtures.wallet :as fixtures.wallet]
             [parenthesin.front-boilerplate.test.aux.helpers :as helpers]
-            [parenthesin.front-boilerplate.test.aux.init :as aux.init :refer [async-cleanup
-                                                                              async-setup
-                                                                              mock-http-with]]
+            [parenthesin.front-boilerplate.test.aux.init :refer [mock-http-with]]
             [parenthesin.front-boilerplate.test.aux.testing-library :as tl]
             [promesa.core :as p]
             [uix.core :refer [$]]))
 
 (use-fixtures :each
-  {:before async-setup
-   :after async-cleanup})
+  {:after tl/async-cleanup})
 
 (deftest app-wallet-test
   (mock-http-with {"wallet/history"
@@ -37,7 +34,7 @@
                   total-span (-> total-values (.querySelector "span"))]
 
             (testing "app wallet view should render with correct structure"
-              (is (match? "text-2xl font-bold mb-4" (-> title-element (aget "className"))))
+              (is (match? "text-2xl font-bold mb-4 mt-6" (-> title-element (aget "className"))))
               (is (match? "mb-4" (-> description-element (aget "className"))))
               (is (match? "BTC Wallet" (-> title-element (.-textContent))))
               (is (match? "This is the history of your transactions." (-> description-element (.-textContent)))))
@@ -54,7 +51,7 @@
             (testing "table data should match fixture data"
               (let [first-row (aget table-rows 0)
                     row-cells (-> first-row (.querySelectorAll "td"))]
-                (is (match? "1" (-> row-cells (aget 0) (.-textContent))))
+                (is (match? "ID" (-> row-cells (aget 0) (.-textContent))))
                 (is (str/includes? (-> row-cells (aget 1) (.-textContent)) "BTC"))
                 (is (str/includes? (-> row-cells (aget 2) (.-textContent)) "US$"))
                 (is (str/includes? (-> row-cells (aget 3) (.-textContent)) "Wed Jan 01 2025"))))

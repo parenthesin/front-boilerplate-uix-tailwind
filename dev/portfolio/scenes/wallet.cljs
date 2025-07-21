@@ -3,6 +3,9 @@
             [portfolio.react-18 :refer-macros [defscene]]
             [uix.core :refer [$]]))
 
+(defscene loading-spinner
+  ($ components/loading-spinner))
+
 (defscene empty-wallet
   ($ components/wallet-entries))
 

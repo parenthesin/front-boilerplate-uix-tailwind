@@ -11,6 +11,27 @@
 (use-fixtures :each
   {:after tl/async-cleanup})
 
+(deftest loading-spinner-test
+  (async done
+         (p/catch
+          (p/let [rendered-component (tl/render ($ components/loading-spinner))
+                  loading-spinner-component (helpers/wait-for rendered-component {:test-id "loading-spinner-component"})]
+
+            (testing "loading spinner component should render with correct classes"
+              (is (match? "flex justify-center items-center h-32"
+                          (-> loading-spinner-component
+                              (aget "className")))))
+
+            (testing "loading spinner span should render with correct classes"
+              (is (match? "loading loading-spinner loading-xl"
+                          (-> loading-spinner-component
+                              (.querySelector ".loading-spinner")
+                              (aget "className")))))
+
+            (done))
+          (fn [err] (is (= nil err))
+            (done)))))
+
 (deftest wallet-entries-test
   (async done
          (p/catch
@@ -21,7 +42,7 @@
                   created-at-item (-> rendered-component (.getByText "Wed Jan 01 2025"))]
 
             (testing "wallet entries component should render with correct classes"
-              (is (match? "overflow-x-auto rounded-box border border-base-content bg-base-100"
+              (is (match? "rounded-box border border-base-content bg-base-100"
                           (-> wallet-entries-component
                               (aget "className")))))
 
