@@ -7,10 +7,12 @@
   {:id id
    :btc-amount btc-amount
    :usd-amount-at (format-amount usd-amount-at)
-   :created-at (->> created-at (new js/Date) .toDateString)})
+   :created-at (->> created-at (new js/Date) (.toLocaleString))})
 
 (defn ->wallet-entries [{:keys [entries total-btc total-current-usd]}]
-  (let [entries (map ->wallet-entry entries)]
+  (let [entries (->> entries
+                     (map ->wallet-entry)
+                     (sort :created-at))]
     {:entries entries
      :total-btc total-btc
      :total-current-usd (format-amount total-current-usd)}))

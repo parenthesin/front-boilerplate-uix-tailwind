@@ -8,7 +8,7 @@
     (is (= {:entries [{:id 1
                        :btc-amount 1
                        :usd-amount-at "30000.00"
-                       :created-at "Wed Jan 01 2025"}]
+                       :created-at "1/1/2025, 9:00:00 AM"}]
             :total-btc 1
             :total-current-usd "30000.00"}
            (adapters/->wallet-entries fixtures.wallet/unparsed-wallet-entry)))))

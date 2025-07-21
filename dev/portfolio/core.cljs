@@ -1,5 +1,7 @@
 (ns portfolio.core
-  (:require [portfolio.scenes.shell]
+  (:require [portfolio.scenes.alert]
+            [portfolio.scenes.icon]
+            [portfolio.scenes.shell]
             [portfolio.scenes.wallet]
             [portfolio.ui :as ui]))
 

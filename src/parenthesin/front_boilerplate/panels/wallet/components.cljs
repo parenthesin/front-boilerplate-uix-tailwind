@@ -1,5 +1,6 @@
 (ns parenthesin.front-boilerplate.panels.wallet.components
-  (:require [uix.core :as uix :refer [defui $]]
+  (:require [parenthesin.front-boilerplate.components.icon :refer [magnifying-glass]]
+            [uix.core :as uix :refer [$ defui]]
             [uix.dom]))
 
 (defui loading-spinner [{:keys [_]}]
@@ -15,17 +16,24 @@
            ($ :tr
               ($ :th "BTC Amount")
               ($ :th "USD Amount At")
-              ($ :th "Created At")))
+              ($ :th "Created At")
+              ($ :th)))
         ($ :tbody
            (for [{:keys [id btc-amount usd-amount-at created-at]} entries]
              (let [withdrawal (> 0 btc-amount)]
                ($ :tr {:key id
                        :className (str "hover:bg-base-200" (when withdrawal " bg-base-300"))}
-                  ($ :td ($ :div {:className "tooltip"
-                                  :data-tip (str "ID: " id)}
-                            (str btc-amount " BTC")))
+                  ($ :td (str btc-amount " BTC"))
                   ($ :td (str "US$ " usd-amount-at))
-                  ($ :td (str created-at)))))))))
+                  ($ :td (str created-at))
+                  ($ :td.text-right ($ :div {:className "tooltip"}
+                                       ($ :div.tooltip-content
+                                          ($ :div.text-xs.text-justify
+                                             ($ :p ($ :b "ID: ") (str id))
+                                             ($ :p ($ :b "BTC Amount: ") (str btc-amount))
+                                             ($ :p ($ :b "USD Amount At: ") (str usd-amount-at))
+                                             ($ :p ($ :b "Created At: ") (str created-at))))
+                                       ($ magnifying-glass))))))))))
 
 (defui refresh-button [{:keys [on-click]}]
   ($ :div {:className "p-4"

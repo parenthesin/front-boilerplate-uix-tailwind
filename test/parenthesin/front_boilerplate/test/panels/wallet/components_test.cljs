@@ -39,7 +39,7 @@
                   wallet-entries-component (helpers/wait-for rendered-component {:test-id "wallet-entries-component"})
                   btc-amount-item (-> rendered-component (.getByText "1 BTC"))
                   usd-amount-at-item (-> rendered-component (.getByText "US$ 30000"))
-                  created-at-item (-> rendered-component (.getByText "Wed Jan 01 2025"))]
+                  created-at-item (-> rendered-component (.getAllByText "Wed Jan 01 2025") (aget 0))]
 
             (testing "wallet entries component should render with correct classes"
               (is (match? "bg-base-100"
