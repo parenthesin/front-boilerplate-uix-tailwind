@@ -12,6 +12,7 @@
      :protocol PROTOCOL
      :host HOST
      :port PORT
+     :language (if debug? "en-US" (.-language js/navigator))
      :base-url (if debug?
                  "http://localhost:3001/"
                  BASE_URL)

@@ -17,7 +17,7 @@
   (mock-http-with {"wallet/history"
                    {:lag 0
                     :status 200
-                    :body fixtures.wallet/wallet-entry}})
+                    :body fixtures.wallet/unparsed-wallet-entry}})
 
   (async done
          (p/catch
@@ -51,7 +51,8 @@
               (let [first-row (aget table-rows 0)
                     row-cells (-> first-row (.querySelectorAll "td"))]
                 (is (str/includes? (-> row-cells (aget 0) (.-textContent)) "BTC"))
-                (is (str/includes? (-> row-cells (aget 1) (.-textContent)) "US$"))))
+                (is (str/includes? (-> row-cells (aget 1) (.-textContent)) "US$"))
+                (is (str/includes? (-> row-cells (aget 2) (.-textContent)) "1/1/2025, 9:00:00 AM"))))
 
             (testing "bottom bar components should render correctly"
               (is (match? "btn btn-primary" (-> refresh-button-component (aget "className"))))
