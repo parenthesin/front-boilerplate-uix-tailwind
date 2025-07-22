@@ -6,11 +6,12 @@
 
 (deftest ->wallet-entries-test
   (testing "Normal data convertion"
-    (let [result (adapters/->wallet-entries fixtures.wallet/unparsed-wallet-entry "en-US")]
-      (is (match? {:entries [{:id 1
-                              :btc-amount 1
-                              :usd-amount-at "30000.00"
-                              :created-at "1/1/2025, 9:00:00 AM"}]
-                   :total-btc 1
-                   :total-current-usd "30000.00"}
-                  result)))))
+    (with-redefs [adapters/get-local-language (constantly "en-US")]
+      (let [result (adapters/->wallet-entries fixtures.wallet/unparsed-wallet-entry)]
+        (is (match? {:entries [{:id 1
+                                :btc-amount 1
+                                :usd-amount-at "30000.00"
+                                :created-at "1/1/2025, 9:00:00 AM"}]
+                     :total-btc 1
+                     :total-current-usd "30000.00"}
+                    result))))))

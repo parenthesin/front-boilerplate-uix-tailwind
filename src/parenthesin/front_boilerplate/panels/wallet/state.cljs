@@ -7,7 +7,7 @@
          :error nil
          :loading false}))
 
-(defn get-wallet-history [{:keys [language]}]
+(defn get-wallet-history []
   (swap! db assoc :error nil :loading true)
   (-> (http/request! {:path "wallet/history"
                       :method :get
@@ -15,7 +15,7 @@
                       :content-type :json})
       (.then (fn [e]
                (swap! db assoc
-                      :result (adapters/->wallet-entries (:body e) language)
+                      :result (adapters/->wallet-entries (:body e))
                       :loading false)))
       (.catch (fn [err]
                 (swap! db assoc

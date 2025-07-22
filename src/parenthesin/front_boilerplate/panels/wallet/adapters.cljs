@@ -3,15 +3,19 @@
 (defn- format-amount [amount]
   (.toFixed amount 2))
 
-(defn- ->wallet-entry [{:keys [id btc-amount usd-amount-at created-at]} language]
+(defn get-local-language []
+  (or (.-language js/navigator)
+      "en-US"))
+
+(defn- ->wallet-entry [{:keys [id btc-amount usd-amount-at created-at]}]
   {:id id
    :btc-amount btc-amount
    :usd-amount-at (format-amount usd-amount-at)
-   :created-at (-> (new js/Date created-at) (.toLocaleString language))})
+   :created-at (-> (new js/Date created-at) (.toLocaleString (get-local-language)))})
 
-(defn ->wallet-entries [{:keys [entries total-btc total-current-usd]} language]
+(defn ->wallet-entries [{:keys [entries total-btc total-current-usd]}]
   (let [entries (->> entries
-                     (map #(->wallet-entry % language))
+                     (map ->wallet-entry)
                      (sort :created-at))]
     {:entries entries
      :total-btc total-btc

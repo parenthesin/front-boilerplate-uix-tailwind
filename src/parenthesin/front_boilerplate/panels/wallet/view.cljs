@@ -7,11 +7,10 @@
             [uix.dom]))
 
 (defui app-wallet [_]
-  (let [{:keys [config]} (uix/use-atom system.state/system)
-        {:keys [result error loading]} (uix/use-atom db)]
+  (let [{:keys [result error loading]} (uix/use-atom db)]
     (uix/use-effect
-     #(get-wallet-history config)
-     [config])
+     #(get-wallet-history)
+     [])
     ($ :div {:className "px-6 py-10"
              :data-testid "app-wallet-view"}
        (if error
@@ -23,5 +22,5 @@
               ($ loading-spinner)
               ($ :<>
                  ($ wallet-entries result)
-                 ($ bottom-bar {:on-click #(get-wallet-history config)
+                 ($ bottom-bar {:on-click get-wallet-history
                                 :wallet-history result}))))))))
