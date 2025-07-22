@@ -1,6 +1,7 @@
 (ns parenthesin.front-boilerplate.infra.http
-  (:require [parenthesin.front-boilerplate.infra.http.component :as http.component]
-            [parenthesin.front-boilerplate.infra.system.state :as system.state]))
+  (:require
+   [parenthesin.front-boilerplate.infra.http.component :as http.component]
+   [parenthesin.front-boilerplate.infra.system.state :as system.state]))
 
 (defn request! [request-input]
   (http.component/request (:http @system.state/system) request-input))

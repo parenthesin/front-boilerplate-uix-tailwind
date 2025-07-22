@@ -1,7 +1,8 @@
 (ns parenthesin.front-boilerplate.panels.shell.components
-  (:require [parenthesin.front-boilerplate.components.icon :refer [moon parenthesin sun]]
-            [uix.core :as uix :refer [$ defui]]
-            [uix.dom]))
+  (:require
+   [parenthesin.front-boilerplate.components.icon :refer [moon parenthesin sun]]
+   [uix.core :as uix :refer [$ defui]]
+   [uix.dom]))
 
 (defui theme-toggle [{:keys [dark-mode set-dark-mode]}]
   ($ :label {:className "swap swap-rotate"}

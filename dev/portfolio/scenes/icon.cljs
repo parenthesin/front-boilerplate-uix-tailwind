@@ -1,7 +1,8 @@
 (ns portfolio.scenes.icon
-  (:require [parenthesin.front-boilerplate.components.icon :as components]
-            [portfolio.react-18 :refer-macros [defscene]]
-            [uix.core :refer [$]]))
+  (:require
+   [parenthesin.front-boilerplate.components.icon :as components]
+   [portfolio.react-18 :refer-macros [defscene]]
+   [uix.core :refer [$]]))
 
 (defscene sun-icon
   ($ components/sun))

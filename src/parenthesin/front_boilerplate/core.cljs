@@ -1,7 +1,8 @@
 (ns parenthesin.front-boilerplate.core
-  (:require [parenthesin.front-boilerplate.panels.shell.view :refer [app-shell]]
-            [uix.core :as uix :refer [defui $]]
-            [uix.dom]))
+  (:require
+   [parenthesin.front-boilerplate.panels.shell.view :refer [app-shell]]
+   [uix.core :as uix :refer [$ defui]]
+   [uix.dom]))
 
 (defui app []
   ($ app-shell {}))

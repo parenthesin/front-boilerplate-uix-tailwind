@@ -9,9 +9,9 @@
    :usd-amount-at (format-amount usd-amount-at)
    :created-at (-> (new js/Date created-at) (.toLocaleString locale #js {:timeZone time-zone}))})
 
-(defn ->wallet-entries [{:keys [entries total-btc total-current-usd]}]
+(defn ->wallet-entries [{:keys [entries total-btc total-current-usd]} language]
   (let [entries (->> entries
-                     (map ->wallet-entry)
+                     (map #(->wallet-entry % language))
                      (sort :created-at))]
     {:entries entries
      :total-btc total-btc

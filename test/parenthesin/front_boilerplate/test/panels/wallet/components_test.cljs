@@ -1,12 +1,13 @@
 (ns parenthesin.front-boilerplate.test.panels.wallet.components-test
-  (:require [cljs.test :refer [async deftest is testing use-fixtures]]
-            [matcher-combinators.test :refer [match?]]
-            [parenthesin.front-boilerplate.panels.wallet.components :as components]
-            [parenthesin.front-boilerplate.test.aux.fixtures.wallet :as fixtures.wallet]
-            [parenthesin.front-boilerplate.test.aux.helpers :as helpers]
-            [parenthesin.front-boilerplate.test.aux.testing-library :as tl]
-            [promesa.core :as p]
-            [uix.core :refer [$]]))
+  (:require
+   [cljs.test :refer [async deftest is testing use-fixtures]]
+   [matcher-combinators.test :refer [match?]]
+   [parenthesin.front-boilerplate.panels.wallet.components :as components]
+   [parenthesin.front-boilerplate.test.aux.fixtures.wallet :as fixtures.wallet]
+   [parenthesin.front-boilerplate.test.aux.helpers :as helpers]
+   [parenthesin.front-boilerplate.test.aux.testing-library :as tl]
+   [promesa.core :as p]
+   [uix.core :refer [$]]))
 
 (use-fixtures :each
   {:after tl/async-cleanup})

@@ -1,7 +1,8 @@
 (ns parenthesin.front-boilerplate.panels.wallet.components
-  (:require [parenthesin.front-boilerplate.components.icon :refer [magnifying-glass]]
-            [uix.core :as uix :refer [$ defui]]
-            [uix.dom]))
+  (:require
+   [parenthesin.front-boilerplate.components.icon :refer [magnifying-glass]]
+   [uix.core :as uix :refer [$ defui]]
+   [uix.dom]))
 
 (defui loading-spinner [{:keys [_]}]
   ($ :div {:className "flex justify-center items-center h-32"

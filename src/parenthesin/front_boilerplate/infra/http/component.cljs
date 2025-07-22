@@ -1,6 +1,7 @@
 (ns parenthesin.front-boilerplate.infra.http.component
-  (:require [lambdaisland.fetch :as fetch]
-            [promesa.core :as p]))
+  (:require
+   [lambdaisland.fetch :as fetch]
+   [promesa.core :as p]))
 
 (defn- current-time [] (.getTime (js/Date.)))
 

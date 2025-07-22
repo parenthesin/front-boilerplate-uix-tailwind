@@ -1,7 +1,8 @@
 (ns portfolio.scenes.shell
-  (:require [parenthesin.front-boilerplate.panels.shell.components :as components]
-            [portfolio.react-18 :refer-macros [defscene]]
-            [uix.core :refer [$]]))
+  (:require
+   [parenthesin.front-boilerplate.panels.shell.components :as components]
+   [portfolio.react-18 :refer-macros [defscene]]
+   [uix.core :refer [$]]))
 
 (defscene shell-navbar-with-dark-mode
   ($ components/navbar {:dark-mode true}))
