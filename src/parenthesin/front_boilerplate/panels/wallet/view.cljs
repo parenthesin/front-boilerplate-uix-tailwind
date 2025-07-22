@@ -1,15 +1,20 @@
 (ns parenthesin.front-boilerplate.panels.wallet.view
-  (:require [parenthesin.front-boilerplate.components.alert :as components.alert]
-            [parenthesin.front-boilerplate.infra.system.state :as system.state]
-            [parenthesin.front-boilerplate.panels.wallet.components :refer [bottom-bar loading-spinner wallet-entries]]
-            [parenthesin.front-boilerplate.panels.wallet.state :refer [db get-wallet-history]]
-            [uix.core :as uix :refer [$ defui]]
-            [uix.dom]))
+  (:require
+   [parenthesin.front-boilerplate.components.alert :as components.alert]
+   [parenthesin.front-boilerplate.infra.system.state :as system.state]
+   [parenthesin.front-boilerplate.panels.wallet.components :refer [bottom-bar
+                                                                   loading-spinner
+                                                                   wallet-entries]]
+   [parenthesin.front-boilerplate.panels.wallet.state :refer [db
+                                                              get-wallet-history]]
+   [uix.core :as uix :refer [$ defui]]
+   [uix.dom]))
 
 (defui app-wallet [_]
-  (let [{:keys [result error loading]} (uix/use-atom db)]
+  (let [{:keys [config]} (uix/use-atom system.state/system)
+        {:keys [result error loading]} (uix/use-atom db)]
     (uix/use-effect
-     #(get-wallet-history)
+     #(get-wallet-history config)
      [])
     ($ :div {:className "px-6 py-10"
              :data-testid "app-wallet-view"}
@@ -22,5 +27,5 @@
               ($ loading-spinner)
               ($ :<>
                  ($ wallet-entries result)
-                 ($ bottom-bar {:on-click get-wallet-history
+                 ($ bottom-bar {:on-click #(get-wallet-history config)
                                 :wallet-history result}))))))))

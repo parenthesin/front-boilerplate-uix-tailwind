@@ -1,5 +1,6 @@
 (ns parenthesin.front-boilerplate.components.icon
-  (:require [uix.core :refer [$ defui]]))
+  (:require
+   [uix.core :refer [$ defui]]))
 
 (defui sun [{:keys [_]}]
   ($ :svg {:className "swap-off h-10 w-10 fill-current"

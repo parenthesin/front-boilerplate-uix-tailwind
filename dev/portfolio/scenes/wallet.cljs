@@ -1,7 +1,8 @@
 (ns portfolio.scenes.wallet
-  (:require [parenthesin.front-boilerplate.panels.wallet.components :as components]
-            [portfolio.react-18 :refer-macros [defscene]]
-            [uix.core :refer [$]]))
+  (:require
+   [parenthesin.front-boilerplate.panels.wallet.components :as components]
+   [portfolio.react-18 :refer-macros [defscene]]
+   [uix.core :refer [$]]))
 
 (defscene loading-spinner
   ($ components/loading-spinner))

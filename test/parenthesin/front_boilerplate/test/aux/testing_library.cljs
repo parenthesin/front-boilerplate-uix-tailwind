@@ -1,5 +1,6 @@
 (ns parenthesin.front-boilerplate.test.aux.testing-library
-  (:require ["@testing-library/react" :as tlr]))
+  (:require
+   ["@testing-library/react" :as tlr]))
 
 (def wait-for tlr/waitFor)
 

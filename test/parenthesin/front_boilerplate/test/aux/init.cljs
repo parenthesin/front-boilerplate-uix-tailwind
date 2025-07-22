@@ -1,7 +1,8 @@
 (ns parenthesin.front-boilerplate.test.aux.init
-  (:require [parenthesin.front-boilerplate.infra.http.component :as http.component]
-            [parenthesin.front-boilerplate.infra.system.state :as system.state]
-            [parenthesin.front-boilerplate.test.aux.testing-library :as tlr]))
+  (:require
+   [parenthesin.front-boilerplate.infra.http.component :as http.component]
+   [parenthesin.front-boilerplate.infra.system.state :as system.state]
+   [parenthesin.front-boilerplate.test.aux.testing-library :as tlr]))
 
 #_{:clj-kondo/ignore [:unresolved-var]}
 (defn async-cleanup []

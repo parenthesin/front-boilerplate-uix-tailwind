@@ -1,5 +1,6 @@
 (ns parenthesin.front-boilerplate.infra.preferences
-  (:require [clojure.edn :as edn]))
+  (:require
+   [clojure.edn :as edn]))
 
 (def default-preferences
   {:dark-mode true})
