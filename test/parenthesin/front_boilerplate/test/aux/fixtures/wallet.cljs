@@ -8,7 +8,7 @@
   {:id 1
    :btc-amount 1
    :usd-amount-at 30000M
-   :created-at "2025-01-01T12:00:00Z"})
+   :created-at "2025-01-01T12:00:00.000+00:00"})
 
 (def unparsed-wallet-entry
   {:entries [unparsed-entry]

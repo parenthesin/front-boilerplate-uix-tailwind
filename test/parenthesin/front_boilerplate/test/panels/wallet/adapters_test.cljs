@@ -6,7 +6,9 @@
 
 (deftest ->wallet-entries-test
   (testing "Normal data convertion"
-    (let [result (adapters/->wallet-entries fixtures.wallet/unparsed-wallet-entry "en-US")]
+    (let [language {:locale "en-US"
+                    :time-zone "America/Sao_Paulo"}
+          result (adapters/->wallet-entries fixtures.wallet/unparsed-wallet-entry language)]
       (is (match? {:entries [{:id 1
                               :btc-amount 1
                               :usd-amount-at "30000.00"
