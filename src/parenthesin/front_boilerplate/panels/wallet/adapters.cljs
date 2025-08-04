@@ -1,7 +1,6 @@
-(ns parenthesin.front-boilerplate.panels.wallet.adapters)
-
-(defn- format-amount [amount]
-  (.toFixed amount 2))
+(ns parenthesin.front-boilerplate.panels.wallet.adapters
+  (:require
+   [parenthesin.front-boilerplate.adapters :refer [format-amount]]))
 
 (defn- ->wallet-entry [{:keys [id btc-amount usd-amount-at created-at]} {:keys [locale time-zone]}]
   {:id id

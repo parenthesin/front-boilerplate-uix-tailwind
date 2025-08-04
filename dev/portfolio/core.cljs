@@ -2,6 +2,7 @@
   (:require
    [portfolio.scenes.alert]
    [portfolio.scenes.icon]
+   [portfolio.scenes.management]
    [portfolio.scenes.shell]
    [portfolio.scenes.wallet]
    [portfolio.ui :as ui]))
