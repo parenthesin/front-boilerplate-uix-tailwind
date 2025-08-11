@@ -2,6 +2,7 @@
   (:require
    [parenthesin.front-boilerplate.components.alert :as components.alert]
    [parenthesin.front-boilerplate.infra.system.state :as system.state]
+   [parenthesin.front-boilerplate.panels.management.view :refer [app-management]]
    [parenthesin.front-boilerplate.panels.wallet.components :refer [bottom-bar
                                                                    loading-spinner
                                                                    wallet-entries]]
@@ -15,7 +16,7 @@
         {:keys [result error loading]} (uix/use-atom db)]
     (uix/use-effect
      #(get-wallet-history config)
-     [])
+     [config])
     ($ :div {:className "px-6 py-10"
              :data-testid "app-wallet-view"}
        (if error
@@ -27,5 +28,7 @@
               ($ loading-spinner)
               ($ :<>
                  ($ wallet-entries result)
-                 ($ bottom-bar {:on-click #(get-wallet-history config)
-                                :wallet-history result}))))))))
+                 ($ bottom-bar {:refresh-on-click #(get-wallet-history config)
+                                :management-on-click #(.showModal (js/document.getElementById "management-modal"))
+                                :wallet-history result})))
+            ($ app-management))))))

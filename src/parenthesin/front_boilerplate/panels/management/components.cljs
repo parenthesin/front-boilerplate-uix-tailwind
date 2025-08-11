@@ -4,7 +4,7 @@
    [uix.core :as uix :refer [$ defui]]
    [uix.dom]))
 
-(defui management-form [{:keys [btc-price]}]
+(defui management-form [{:keys [btc-price buy-on-click sell-on-click]}]
   (let [[btc-value set-btc-value] (uix/use-state 0)
         [usd-price set-usd-price] (uix/use-state 0)]
     ($ :form.flex.flex-col
@@ -25,11 +25,13 @@
              ($ :label "This transaction will represent ")
              ($ :label.font-bold "₿ ")
              ($ :label (if (empty? (str btc-value)) "0" btc-value))
-             ($ :label " ~= ")
+             ($ :label " ≈ ")
              ($ :label.font-bold "$ ")
              ($ :label (format-amount usd-price))))
        ($ :.flex.justify-end
-          ($ :button {:className "btn btn-primary m-2"}
+          ($ :button {:className "btn btn-primary m-2"
+                      :on-click buy-on-click}
              "Buy")
-          ($ :button {:className "btn btn-secondary m-2"}
+          ($ :button {:className "btn btn-secondary m-2"
+                      :on-click sell-on-click}
              "Sell")))))

@@ -37,11 +37,16 @@
                                        ($ magnifying-glass))))))))))
 
 (defui refresh-button [{:keys [on-click]}]
-  ($ :div {:className "p-4"
-           :data-testid "refresh-button-component"}
-     ($ :button.btn.btn-primary
+  ($ :div {:data-testid "refresh-button-component"}
+     ($ :button.btn.btn-primary.join-item
         {:on-click on-click}
         "Refresh")))
+
+(defui management-button [{:keys [on-click]}]
+  ($ :div {:data-testid "refresh-button-component"}
+     ($ :button.btn.btn-accent.join-item
+        {:on-click on-click}
+        "Management")))
 
 (defui total-values [{:keys [total-btc total-current-usd]}]
   ($ :div {:className "p-4"
@@ -50,8 +55,10 @@
         (str "Total Values: BTC " total-btc
              "| US$ " total-current-usd))))
 
-(defui bottom-bar [{:keys [on-click wallet-history]}]
+(defui bottom-bar [{:keys [management-on-click refresh-on-click wallet-history]}]
   ($ :div {:className "flex justify-between"
            :data-testid "bottom-bar-component"}
-     ($ refresh-button {:on-click on-click})
+     ($ :.join.p-4
+        ($ refresh-button {:on-click refresh-on-click})
+        ($ management-button {:on-click management-on-click}))
      ($ total-values wallet-history)))
