@@ -4,7 +4,7 @@
    [uix.core :as uix :refer [$ defui]]
    [uix.dom]))
 
-(defui management-form [{:keys [btc-price buy-on-click sell-on-click]}]
+(defui management-form [{:keys [btc-price buy-on-click sell-on-click on-change]}]
   (let [[btc-value set-btc-value] (uix/use-state 0)
         [usd-price set-usd-price] (uix/use-state 0)]
     ($ :form.flex.flex-col
@@ -17,6 +17,7 @@
                         :value btc-value
                         :onChange (fn [element]
                                     (let [btc-val (-> element .-target .-value)]
+                                      (on-change)
                                       (set-btc-value btc-val)
                                       (set-usd-price (* btc-price btc-val))))})
              ($ :label "BTC")))

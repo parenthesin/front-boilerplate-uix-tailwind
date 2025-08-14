@@ -1,14 +1,13 @@
 (ns parenthesin.front-boilerplate.panels.management.state
   (:require
-   [parenthesin.front-boilerplate.infra.http :as http]
-   [parenthesin.front-boilerplate.panels.wallet.adapters :as adapters]))
+   [parenthesin.front-boilerplate.infra.http :as http]))
 
 (def db
   (atom {:result nil
          :error nil
          :loading false}))
 
-(defn get-current-btc-usd [{:keys [_]}]
+(defn get-current-btc-usd []
   (swap! db assoc :error nil :loading true)
   (-> (http/request! {:path "wallet/current-btc-usd"
                       :method :get
