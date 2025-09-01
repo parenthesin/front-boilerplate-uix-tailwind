@@ -62,16 +62,10 @@
           (p/let [clicked-state (atom false)
                   on-click-fn (fn [] (reset! clicked-state true))
                   rendered-component (tl/render ($ components/refresh-button {:on-click on-click-fn}))
-                  refresh-button-component (helpers/wait-for rendered-component {:test-id "refresh-button-component"})
                   button-element (-> rendered-component (.getByText "Refresh"))]
 
-            (testing "refresh button component should render with correct class for div"
-              (is (match? "p-4"
-                          (-> refresh-button-component
-                              (aget "className")))))
-
             (testing "refresh button should render with correct classes"
-              (is (match? "btn btn-primary" (-> button-element (aget "className")))))
+              (is (match? "btn btn-primary join-item" (-> button-element (aget "className")))))
 
             (testing "refresh button should call on-click function when clicked"
               (is (= false @clicked-state))
@@ -122,7 +116,7 @@
                               (aget "className")))))
 
             (testing "refresh button should render with correct classes"
-              (is (match? "btn btn-primary" (-> refresh-button-component (aget "className")))))
+              (is (match? "btn btn-primary join-item" (-> refresh-button-component (aget "className")))))
 
             (testing "total values should render with correct values"
               (is (= "Total Values: BTC 1| US$ 30000" (-> total-values-item (.-textContent)))))

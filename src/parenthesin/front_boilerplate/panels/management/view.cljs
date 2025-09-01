@@ -7,7 +7,7 @@
    [uix.core :as uix :refer [$ defui]]
    [uix.dom]))
 
-(defui app-management [{:keys [_]}]
+(defui app-management [{:keys [buy-on-click sell-on-click]}]
   (let [{:keys [result error]} (uix/use-atom db)]
     (uix/use-effect
      #(get-current-btc-usd)
@@ -20,8 +20,8 @@
          ($ :.modal-box
             ($ :h3 "Management")
             ($ management-form {:btc-price (:usd-amount result)
-                                :buy-on-click #(js/alert "aaa")
-                                :sell-on-click #(js/alert "aaa")
+                                :buy-on-click buy-on-click
+                                :sell-on-click sell-on-click
                                 :on-change get-current-btc-usd})))
        ($ :form {:method "dialog"
                  :className "modal-backdrop"}

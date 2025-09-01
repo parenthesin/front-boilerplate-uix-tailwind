@@ -7,7 +7,9 @@
                                                                    loading-spinner
                                                                    wallet-entries]]
    [parenthesin.front-boilerplate.panels.wallet.state :refer [db
-                                                              get-wallet-history]]
+                                                              get-wallet-history
+                                                              wallet-deposit
+                                                              wallet-withdrawal]]
    [uix.core :as uix :refer [$ defui]]
    [uix.dom]))
 
@@ -31,4 +33,5 @@
                  ($ bottom-bar {:refresh-on-click #(get-wallet-history config)
                                 :management-on-click #(.showModal (js/document.getElementById "management-modal"))
                                 :wallet-history result})))
-            ($ app-management))))))
+            ($ app-management {:buy-on-click (partial wallet-deposit config)
+                               :sell-on-click (partial wallet-withdrawal config)}))))))

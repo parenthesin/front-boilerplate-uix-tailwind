@@ -4,6 +4,11 @@
    [uix.core :as uix :refer [$ defui]]
    [uix.dom]))
 
+(defn ^:private modal-action-handler [e action-fn]
+  (.preventDefault e)
+  (action-fn)
+  (.close (js/document.getElementById "management-modal")))
+
 (defui management-form [{:keys [btc-price buy-on-click sell-on-click on-change]}]
   (let [[btc-value set-btc-value] (uix/use-state 0)
         [usd-price set-usd-price] (uix/use-state 0)]
@@ -31,8 +36,8 @@
              ($ :label (format-amount usd-price))))
        ($ :.flex.justify-end
           ($ :button {:className "btn btn-primary m-2"
-                      :on-click buy-on-click}
+                      :on-click (fn [e] (modal-action-handler e #(buy-on-click {:value (js/parseFloat btc-value)})))}
              "Buy")
           ($ :button {:className "btn btn-secondary m-2"
-                      :on-click sell-on-click}
+                      :on-click (fn [e] (modal-action-handler e #(sell-on-click {:value (* btc-value -1)})))}
              "Sell")))))

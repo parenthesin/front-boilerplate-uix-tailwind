@@ -2,7 +2,7 @@
   (:require
    [parenthesin.front-boilerplate.adapters :refer [format-amount]]))
 
-(defn- ->wallet-entry [{:keys [id btc-amount usd-amount-at created-at]} {:keys [locale time-zone]}]
+(defn ->wallet-entry [{:keys [id btc-amount usd-amount-at created-at]} {:keys [locale time-zone]}]
   {:id id
    :btc-amount btc-amount
    :usd-amount-at (format-amount usd-amount-at)
