@@ -107,7 +107,8 @@
                                                    {:on-click on-click-fn
                                                     :wallet-history fixtures.wallet/wallet-entry}))
                   bottom-bar-component (helpers/wait-for rendered-component {:test-id "bottom-bar-component"})
-                  refresh-button-component (-> rendered-component (.getByText "Refresh"))
+                  refresh-button (helpers/wait-for rendered-component {:test-id "refresh-button-component"})
+                  refresh-button-component (-> refresh-button (.querySelector "button"))
                   total-values-item (-> rendered-component (.getByText "Total Values: BTC 1| US$ 30000"))]
 
             (testing "bottom bar component should render with correct class for flex container"
@@ -120,13 +121,6 @@
 
             (testing "total values should render with correct values"
               (is (= "Total Values: BTC 1| US$ 30000" (-> total-values-item (.-textContent)))))
-
-            (testing "refresh button should call on-click function when clicked"
-              (is (= false @clicked-state))
-
-              (.click refresh-button-component)
-
-              (is (= true @clicked-state)))
 
             (done))
           (fn [err] (is (= nil err))

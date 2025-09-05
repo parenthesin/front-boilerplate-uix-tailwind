@@ -43,7 +43,7 @@
         "Refresh")))
 
 (defui management-button [{:keys [on-click]}]
-  ($ :div {:data-testid "refresh-button-component"}
+  ($ :div {:data-testid "management-button-component"}
      ($ :button.btn.btn-accent.join-item
         {:on-click on-click}
         "Management")))

@@ -56,7 +56,7 @@
                 (is (str/includes? (-> row-cells (aget 2) (.-textContent)) "1/1/2025, 9:00:00 AM"))))
 
             (testing "bottom bar components should render correctly"
-              (is (match? "btn btn-primary" (-> refresh-button-component (aget "className"))))
+              (is (match? "btn btn-primary join-item" (-> refresh-button-component (aget "className"))))
               (is (match? "Refresh" (-> refresh-button-component (.-textContent))))
               (is (match? "text-lg font-bold" (-> total-span (aget "className"))))
               (is (str/includes? (-> total-span (.-textContent)) "Total Values:"))
