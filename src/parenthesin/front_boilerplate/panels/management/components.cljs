@@ -12,11 +12,13 @@
 (defui management-form [{:keys [btc-price buy-on-click sell-on-click on-change]}]
   (let [[btc-value set-btc-value] (uix/use-state 0)
         [usd-price set-usd-price] (uix/use-state 0)]
-    ($ :form.flex.flex-col
+    ($ :form {:className "flex flex-col"
+              :data-testid "management-form-component"}
        ($ :.flex
           ($ :label.input.m-2.w-full
              ($ :input {:type "number"
                         :className "grow"
+                        :data-testid "management-form-btc-input"
                         :min "0"
                         :step "any"
                         :value btc-value
@@ -36,8 +38,10 @@
              ($ :label (format-amount usd-price))))
        ($ :.flex.justify-end
           ($ :button {:className "btn btn-primary m-2"
+                      :data-testid "management-form-buy-button"
                       :on-click (fn [e] (modal-action-handler e #(buy-on-click {:value (js/parseFloat btc-value)})))}
              "Buy")
           ($ :button {:className "btn btn-secondary m-2"
+                      :data-testid "management-form-sell-button"
                       :on-click (fn [e] (modal-action-handler e #(sell-on-click {:value (* btc-value -1)})))}
              "Sell")))))
