@@ -7,7 +7,8 @@
 (defn ^:private modal-action-handler [e action-fn]
   (.preventDefault e)
   (action-fn)
-  (.close (js/document.getElementById "management-modal")))
+  (when-let [modal (js/document.getElementById "management-modal")]
+    (.close modal)))
 
 (defui management-form [{:keys [btc-price buy-on-click sell-on-click on-change]}]
   (let [[btc-value set-btc-value] (uix/use-state 0)

@@ -15,7 +15,13 @@
   {:after tl/async-cleanup})
 
 (deftest app-wallet-test
-  (mock-http-with {"wallet/history"
+  (mock-http-with {"wallet/current-btc-usd"
+                   {:lag 0
+                    :status 200
+                    :body {:btc-amount 1
+                           :usd-amount 30000M}}
+
+                   "wallet/history"
                    {:lag 0
                     :status 200
                     :body fixtures.wallet/unparsed-wallet-entry}})
