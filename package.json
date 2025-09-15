@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "An example project using UIx with Tailwind CSS",
   "scripts": {
+    "dev": "npm start",
     "start": "shadow-cljs watch app test portfolio",
     "test": "shadow-cljs compile ci-test && karma start --single-run",
     "release": "shadow-cljs release app"
