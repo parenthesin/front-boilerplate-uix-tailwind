@@ -9,6 +9,14 @@
          :error nil
          :loading false}))
 
+(defn update-db [entry btc-price value language]
+  (let [current-btc (get-in @db [:result :total-btc])
+        total-btc (+ value current-btc)]
+    (swap! db update-in [:result :entries] conj (adapters/->wallet-entry entry language))
+    (swap! db update-in [:result :total-btc] + value)
+    (swap! db assoc-in [:result :total-current-usd] (format-amount (* total-btc btc-price)))
+    (swap! db assoc :loading false)))
+
 (defn get-wallet-history [{:keys [language]}]
   (swap! db assoc :error nil :loading true)
   (-> (http/request! {:path "wallet/history"
@@ -32,13 +40,7 @@
                       :accept :json
                       :content-type :json
                       :body {:btc value}})
-      (.then (fn [e]
-               (let [current-btc (get-in @db [:result :total-btc])
-                     total-btc (+ value current-btc)]
-                 (swap! db update-in [:result :entries] conj (adapters/->wallet-entry (:body e) language))
-                 (swap! db update-in [:result :total-btc] + value)
-                 (swap! db assoc-in [:result :total-current-usd] (format-amount (* total-btc btc-price)))
-                 (swap! db assoc :loading false))))
+      (.then (fn [e] (update-db (:body e) btc-price value language)))
       (.catch (fn [err]
                 (swap! db assoc
                        :error err
@@ -52,13 +54,7 @@
                       :accept :json
                       :content-type :json
                       :body {:btc value}})
-      (.then (fn [e]
-               (let [current-btc (get-in @db [:result :total-btc])
-                     total-btc (+ value current-btc)]
-                 (swap! db update-in [:result :entries] conj (adapters/->wallet-entry (:body e) language))
-                 (swap! db update-in [:result :total-btc] + value)
-                 (swap! db assoc-in [:result :total-current-usd] (format-amount (* total-btc btc-price)))
-                 (swap! db assoc :loading false))))
+      (.then (fn [e] (update-db (:body e) btc-price value language)))
       (.catch (fn [err]
                 (swap! db assoc
                        :error err
