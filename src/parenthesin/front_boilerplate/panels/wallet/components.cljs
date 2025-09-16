@@ -22,7 +22,8 @@
         ($ :tbody
            (for [{:keys [id btc-amount usd-amount-at created-at]} entries]
              (let [withdrawal (> 0 btc-amount)]
-               ($ :tr {:key id
+               ($ :tr {:id id
+                       :key id
                        :className (str "hover:bg-base-200" (when withdrawal " bg-base-300"))}
                   ($ :td (str btc-amount " BTC"))
                   ($ :td (str "US$ " usd-amount-at))

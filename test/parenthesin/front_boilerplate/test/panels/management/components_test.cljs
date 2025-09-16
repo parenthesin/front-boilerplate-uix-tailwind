@@ -18,7 +18,8 @@
   {:btc-price 3000
    :buy-on-click (fn [{:keys [value]}] (reset! buy-state value))
    :sell-on-click (fn [{:keys [value]}] (reset! sell-state value))
-   :on-change (fn [])})
+   :on-change (fn [])
+   :close-fn (fn [])})
 
 (deftest management-form-test
   (async done

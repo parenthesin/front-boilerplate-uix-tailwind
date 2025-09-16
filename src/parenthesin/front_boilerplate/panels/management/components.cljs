@@ -4,13 +4,12 @@
    [uix.core :as uix :refer [$ defui]]
    [uix.dom]))
 
-(defn ^:private modal-action-handler [e action-fn]
+(defn ^:private modal-action-handler [e action-fn close-fn]
   (.preventDefault e)
   (action-fn)
-  (when-let [modal (js/document.getElementById "management-modal")]
-    (.close modal)))
+  (close-fn))
 
-(defui management-form [{:keys [btc-price buy-on-click sell-on-click on-change]}]
+(defui management-form [{:keys [btc-price buy-on-click sell-on-click on-change close-fn]}]
   (let [[btc-value set-btc-value] (uix/use-state 0)
         [usd-price set-usd-price] (uix/use-state 0)]
     ($ :form {:className "flex flex-col"
@@ -40,9 +39,17 @@
        ($ :.flex.justify-end
           ($ :button {:className "btn btn-primary m-2"
                       :data-testid "management-form-buy-button"
-                      :on-click (fn [e] (modal-action-handler e #(buy-on-click {:value (js/parseFloat btc-value)})))}
+                      :on-click (fn [e]
+                                  (modal-action-handler e
+                                                        #(buy-on-click {:value (js/parseFloat btc-value)
+                                                                        :btc-price btc-price})
+                                                        close-fn))}
              "Buy")
           ($ :button {:className "btn btn-secondary m-2"
                       :data-testid "management-form-sell-button"
-                      :on-click (fn [e] (modal-action-handler e #(sell-on-click {:value (* btc-value -1)})))}
+                      :on-click (fn [e]
+                                  (modal-action-handler e
+                                                        #(sell-on-click {:value (js/parseFloat (* btc-value -1))
+                                                                         :btc-price btc-price})
+                                                        close-fn))}
              "Sell")))))

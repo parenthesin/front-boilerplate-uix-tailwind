@@ -22,7 +22,8 @@
             ($ management-form {:btc-price (:usd-amount result)
                                 :buy-on-click buy-on-click
                                 :sell-on-click sell-on-click
-                                :on-change get-current-btc-usd})))
+                                :on-change get-current-btc-usd
+                                :close-fn #(.close (js/document.getElementById "management-modal"))})))
        ($ :form {:method "dialog"
                  :className "modal-backdrop"}
           ($ :button "close")))))
