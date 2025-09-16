@@ -90,6 +90,9 @@
               (p/let [management-button (helpers/wait-for rendered-view {:test-id "management-button-component"})
                       btc-input (helpers/wait-for rendered-view {:test-id "management-form-btc-input"})
                       buy-button (helpers/wait-for rendered-view {:test-id "management-form-buy-button"})
+                      ;; here we're emulating a click, input, and saving operations
+                      ;; as they're async operations we've to add a simple `tl/wait-for`
+                      ;; to properly wait for these operations to finish
                       _click (tl/wait-for #(tl/click management-button))
                       _input (tl/wait-for #(tl/change btc-input 1))
                       _save (tl/wait-for #(tl/click buy-button))
