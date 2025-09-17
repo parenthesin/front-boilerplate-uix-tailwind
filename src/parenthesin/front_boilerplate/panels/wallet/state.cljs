@@ -49,14 +49,20 @@
 
 (defn wallet-withdrawal [{:keys [language]} {:keys [btc-price value]}]
   (swap! db assoc :error nil :loading true)
-  (-> (http/request! {:path "wallet/withdrawal"
-                      :method :post
-                      :accept :json
-                      :content-type :json
-                      :body {:btc value}})
-      (.then (fn [e] (update-db (:body e) btc-price value language)))
-      (.catch (fn [err]
-                (swap! db assoc
-                       :error err
-                       :loading false)
-                (js/console.error "request to withdrawal entries! catch: " (clj->js err))))))
+  (let [current-btc (get-in @db [:result :total-btc])
+        value-to-withdraw (* value -1)]
+    (if (> value current-btc)
+      (swap! db assoc
+             :error #js {:message "You cannot withdraw more than your current balance."}
+             :loading false)
+      (-> (http/request! {:path "wallet/withdrawal"
+                          :method :post
+                          :accept :json
+                          :content-type :json
+                          :body {:btc value-to-withdraw}})
+          (.then (fn [e] (update-db (:body e) btc-price value-to-withdraw language)))
+          (.catch (fn [err]
+                    (swap! db assoc
+                           :error err
+                           :loading false)
+                    (js/console.error "request to withdrawal entries! catch: " (clj->js err))))))))

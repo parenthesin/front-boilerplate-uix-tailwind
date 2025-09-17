@@ -49,7 +49,7 @@
                       :data-testid "management-form-sell-button"
                       :on-click (fn [e]
                                   (modal-action-handler e
-                                                        #(sell-on-click {:value (js/parseFloat (* btc-value -1))
+                                                        #(sell-on-click {:value (js/parseFloat btc-value)
                                                                          :btc-price btc-price})
                                                         close-fn))}
              "Sell")))))

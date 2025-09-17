@@ -128,6 +128,18 @@
                 (is (match? "Total Values: BTC 1| US$ 30000.00"
                             (.-textContent total-span)))))
 
+            (testing "should not allow selling more than owned"
+              (p/let [management-button (helpers/wait-for rendered-view {:test-id "management-button-component"})
+                      btc-input (helpers/wait-for rendered-view {:test-id "management-form-btc-input"})
+                      sell-button (helpers/wait-for rendered-view {:test-id "management-form-sell-button"})
+                      _click (tl/wait-for #(tl/click management-button))
+                      _input (tl/wait-for #(tl/change btc-input 5))
+                      _save (tl/wait-for #(tl/click sell-button))
+                      alert-message (helpers/wait-for rendered-view {:test-id "alert-error-component-message"})]
+
+                (is (match? "You cannot withdraw more than your current balance."
+                            (.-textContent alert-message)))))
+
             (done))
           (fn [err]
             (is (= nil err))

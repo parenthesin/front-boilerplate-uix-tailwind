@@ -48,7 +48,7 @@
               (testing "sell operation"
                 (tl/change btc-input 5)
                 (tl/click sell-button)
-                (is (match? -5 @sell-state))))
+                (is (match? 5 @sell-state))))
 
             (done))
           (fn [err]

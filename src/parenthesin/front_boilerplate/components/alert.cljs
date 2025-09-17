@@ -9,6 +9,8 @@
            :role "alert"}
      ($ :div.flex.items-center
         ($ error)
-        ($ :div.font-bold.text-xl (str (.-message info))))
+        ($ :div {:className "font-bold text-xl"
+                 :data-testid "alert-error-component-message"}
+           (str (.-message info))))
      ($ :div {:data-testid "alert-error-component-info"}
         (str (.-data info)))))
