@@ -58,18 +58,18 @@
                   total-span (-> total-values (.querySelector "span"))]
 
             (testing "app wallet view should render with correct structure"
-              (is (match? "text-2xl font-bold mb-4" (-> title-element (aget "className"))))
-              (is (match? "mb-4" (-> description-element (aget "className"))))
-              (is (match? "BTC Wallet" (-> title-element (.-textContent))))
-              (is (match? "This is the history of your transactions." (-> description-element (.-textContent)))))
+              (is (match? "text-2xl font-bold mb-4" (aget title-element "className")))
+              (is (match? "mb-4" (aget description-element "className")))
+              (is (match? "BTC Wallet" (.-textContent title-element)))
+              (is (match? "This is the history of your transactions." (.-textContent description-element))))
 
             (testing "wallet entries table should render correctly"
-              (is (match? "table" (-> table-element (aget "className"))))
-              (is (match? 4 (-> table-headers (aget "length"))))
+              (is (match? "table" (aget table-element "className")))
+              (is (match? 4 (aget table-headers "length")))
               (is (match? "BTC Amount" (-> table-headers (aget 0) (.-textContent))))
               (is (match? "USD Amount At" (-> table-headers (aget 1) (.-textContent))))
               (is (match? "Created At" (-> table-headers (aget 2) (.-textContent))))
-              (is (< 0 (-> table-rows (aget "length")))))
+              (is (< 0 (aget table-rows "length"))))
 
             (testing "table data should match fixture data"
               (let [first-row (aget table-rows 0)
@@ -79,12 +79,12 @@
                 (is (str/includes? (-> row-cells (aget 2) (.-textContent)) "1/1/2025, 9:00:00 AM"))))
 
             (testing "bottom bar components should render correctly"
-              (is (match? "btn btn-primary join-item" (-> refresh-button-component (aget "className"))))
-              (is (match? "Refresh" (-> refresh-button-component (.-textContent))))
-              (is (match? "text-lg font-bold" (-> total-span (aget "className"))))
-              (is (str/includes? (-> total-span (.-textContent)) "Total Values:"))
-              (is (str/includes? (-> total-span (.-textContent)) "BTC"))
-              (is (str/includes? (-> total-span (.-textContent)) "US$")))
+              (is (match? "btn btn-primary join-item" (aget refresh-button-component "className")))
+              (is (match? "Refresh" (.-textContent refresh-button-component)))
+              (is (match? "text-lg font-bold" (aget total-span "className")))
+              (is (str/includes? (.-textContent total-span) "Total Values:"))
+              (is (str/includes? (.-textContent total-span) "BTC"))
+              (is (str/includes? (.-textContent total-span) "US$")))
 
             (testing "table data should update when buying"
               (p/let [management-button (helpers/wait-for rendered-view {:test-id "management-button-component"})

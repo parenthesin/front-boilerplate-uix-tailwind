@@ -32,38 +32,21 @@
 
             (testing "management form component should render with correct classes"
               (is (match? "flex flex-col"
-                          (-> management-form-component
-                              (aget "className")))))
+                          (aget management-form-component "className"))))
 
             (testing "btc input should render with correct classes and attributes"
-              (is (match? "grow"
-                          (-> btc-input
-                              (aget "className"))))
-              (is (match? "number"
-                          (-> btc-input
-                              (aget "type"))))
-              (is (match? "0"
-                          (-> btc-input
-                              (aget "min"))))
-              (is (match? "any"
-                          (-> btc-input
-                              (aget "step")))))
+              (is (match? "grow" (aget btc-input "className")))
+              (is (match? "number" (aget btc-input "type")))
+              (is (match? "0" (aget btc-input "min")))
+              (is (match? "any" (aget btc-input "step"))))
 
             (testing "buy button should render with correct classes and text"
-              (is (match? "btn btn-primary m-2"
-                          (-> buy-button
-                              (aget "className"))))
-              (is (match? "Buy"
-                          (-> buy-button
-                              (.-textContent)))))
+              (is (match? "btn btn-primary m-2" (aget buy-button "className")))
+              (is (match? "Buy" (.-textContent buy-button))))
 
             (testing "sell button should render with correct classes and text"
-              (is (match? "btn btn-secondary m-2"
-                          (-> sell-button
-                              (aget "className"))))
-              (is (match? "Sell"
-                          (-> sell-button
-                              (.-textContent)))))
+              (is (match? "btn btn-secondary m-2" (aget sell-button "className")))
+              (is (match? "Sell" (.-textContent sell-button))))
 
             (testing "simulating button click should call on-click function with correct values"
               (testing "buy operation"

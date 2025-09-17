@@ -9,6 +9,12 @@
   (action-fn)
   (close-fn))
 
+(defn ^:private update-btc
+  [btc-val btc-price on-change set-btc-value set-usd-price]
+  (on-change)
+  (set-btc-value btc-val)
+  (set-usd-price (* btc-price btc-val)))
+
 (defui management-form [{:keys [btc-price buy-on-click sell-on-click on-change close-fn]}]
   (let [[btc-value set-btc-value] (uix/use-state 0)
         [usd-price set-usd-price] (uix/use-state 0)]
@@ -22,11 +28,7 @@
                         :min "0"
                         :step "any"
                         :value btc-value
-                        :onChange (fn [element]
-                                    (let [btc-val (-> element .-target .-value)]
-                                      (on-change)
-                                      (set-btc-value btc-val)
-                                      (set-usd-price (* btc-price btc-val))))})
+                        :onChange (fn [e] (update-btc (-> e .-target .-value) btc-price on-change set-btc-value set-usd-price))})
              ($ :label "BTC")))
        ($ :.flex
           ($ :label.m-2.w-full.text-right
