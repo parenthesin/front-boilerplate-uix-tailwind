@@ -93,9 +93,9 @@
                       ;; here we're emulating a click, input, and saving operations
                       ;; as they're async operations we've to add a simple `tl/wait-for`
                       ;; to properly wait for these operations to finish
-                      _click (tl/wait-for #(tl/click management-button))
-                      _input (tl/wait-for #(tl/change btc-input 1))
-                      _save (tl/wait-for #(tl/click buy-button))
+                      _perform (tl/wait-for #(helpers/perform {:click management-button
+                                                               :input {:input btc-input :value 1}
+                                                               :save buy-button}))
                       wallet-entries-component (helpers/wait-for rendered-view {:test-id "wallet-entries-component"})
                       wallet-entries (-> wallet-entries-component (.querySelector "table") (.querySelectorAll "tbody tr"))
                       total-values (helpers/wait-for rendered-view {:test-id "total-values-component"})
@@ -112,9 +112,9 @@
               (p/let [management-button (helpers/wait-for rendered-view {:test-id "management-button-component"})
                       btc-input (helpers/wait-for rendered-view {:test-id "management-form-btc-input"})
                       sell-button (helpers/wait-for rendered-view {:test-id "management-form-sell-button"})
-                      _click (tl/wait-for #(tl/click management-button))
-                      _input (tl/wait-for #(tl/change btc-input 1))
-                      _save (tl/wait-for #(tl/click sell-button))
+                      _perform (tl/wait-for #(helpers/perform {:click management-button
+                                                               :input {:input btc-input :value 1}
+                                                               :save sell-button}))
                       wallet-entries-component (helpers/wait-for rendered-view {:test-id "wallet-entries-component"})
                       wallet-entries (-> wallet-entries-component (.querySelector "table") (.querySelectorAll "tbody tr"))
                       total-values (helpers/wait-for rendered-view {:test-id "total-values-component"})
@@ -132,9 +132,9 @@
               (p/let [management-button (helpers/wait-for rendered-view {:test-id "management-button-component"})
                       btc-input (helpers/wait-for rendered-view {:test-id "management-form-btc-input"})
                       sell-button (helpers/wait-for rendered-view {:test-id "management-form-sell-button"})
-                      _click (tl/wait-for #(tl/click management-button))
-                      _input (tl/wait-for #(tl/change btc-input 5))
-                      _save (tl/wait-for #(tl/click sell-button))
+                      _perform (tl/wait-for #(helpers/perform {:click management-button
+                                                               :input {:input btc-input :value 5}
+                                                               :save sell-button}))
                       alert-message (helpers/wait-for rendered-view {:test-id "alert-error-component-message"})]
 
                 (is (match? "You cannot withdraw more than your current balance."

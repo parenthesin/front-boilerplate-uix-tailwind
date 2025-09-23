@@ -33,5 +33,6 @@
                  ($ bottom-bar {:refresh-on-click #(get-wallet-history config)
                                 :management-on-click #(.showModal (js/document.getElementById "management-modal"))
                                 :wallet-history result})))
-            ($ app-management {:buy-on-click (partial wallet-deposit config)
+            ($ app-management {:balance (:total-btc result)
+                               :buy-on-click (partial wallet-deposit config)
                                :sell-on-click (partial wallet-withdrawal config)}))))))

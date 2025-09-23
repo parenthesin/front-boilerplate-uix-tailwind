@@ -4,32 +4,24 @@
    [uix.core :as uix :refer [$ defui]]
    [uix.dom]))
 
-(defn ^:private modal-action-handler [e action-fn close-fn]
-  (.preventDefault e)
-  (action-fn)
-  (close-fn))
-
-(defn ^:private update-btc
-  [btc-val btc-price on-change set-btc-value set-usd-price]
-  (on-change)
-  (set-btc-value btc-val)
-  (set-usd-price (* btc-price btc-val)))
-
-(defui management-form [{:keys [btc-price buy-on-click sell-on-click on-change close-fn]}]
-  (let [[btc-value set-btc-value] (uix/use-state 0)
-        [usd-price set-usd-price] (uix/use-state 0)]
+(defui management-form [{:keys [balance btc-value buy-on-click sell-on-click on-change usd-price]}]
+  (let [has-balance? (> btc-value balance)]
     ($ :form {:className "flex flex-col"
               :data-testid "management-form-component"}
-       ($ :.flex
-          ($ :label.input.m-2.w-full
-             ($ :input {:type "number"
-                        :className "grow"
-                        :data-testid "management-form-btc-input"
-                        :min "0"
-                        :step "any"
-                        :value btc-value
-                        :onChange (fn [e] (update-btc (-> e .-target .-value) btc-price on-change set-btc-value set-usd-price))})
-             ($ :label "BTC")))
+       ($ :fieldset
+          ($ :.flex
+             ($ :label.input.m-2.w-full
+                ($ :input {:type "number"
+                           :className "grow"
+                           :data-testid "management-form-btc-input"
+                           :min "0"
+                           :step "any"
+                           :value btc-value
+                           :onChange on-change})
+                ($ :label "BTC")))
+
+          ($ :p {:className "label mx-2 w-full text-xs text-error"}
+             (when has-balance? (str "Your total balance is ₿ " balance))))
        ($ :.flex
           ($ :label.m-2.w-full.text-right
              ($ :label "This transaction will represent ")
@@ -41,17 +33,10 @@
        ($ :.flex.justify-end
           ($ :button {:className "btn btn-primary m-2"
                       :data-testid "management-form-buy-button"
-                      :on-click (fn [e]
-                                  (modal-action-handler e
-                                                        #(buy-on-click {:value (js/parseFloat btc-value)
-                                                                        :btc-price btc-price})
-                                                        close-fn))}
+                      :on-click buy-on-click}
              "Buy")
           ($ :button {:className "btn btn-secondary m-2"
                       :data-testid "management-form-sell-button"
-                      :on-click (fn [e]
-                                  (modal-action-handler e
-                                                        #(sell-on-click {:value (js/parseFloat btc-value)
-                                                                         :btc-price btc-price})
-                                                        close-fn))}
+                      :disabled has-balance?
+                      :on-click sell-on-click}
              "Sell")))))
