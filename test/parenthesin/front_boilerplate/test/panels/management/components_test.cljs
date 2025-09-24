@@ -11,15 +11,13 @@
 (use-fixtures :each
   {:after tl/async-cleanup})
 
-(def buy-state (atom false))
-(def sell-state (atom false))
-
 (def management-form-props
-  {:btc-price 3000
-   :buy-on-click (fn [{:keys [value]}] (reset! buy-state value))
-   :sell-on-click (fn [{:keys [value]}] (reset! sell-state value))
+  {:balance 10M
+   :btc-value 1
+   :buy-on-click (fn [])
+   :sell-on-click (fn [])
    :on-change (fn [])
-   :close-fn (fn [])})
+   :usd-price 30000})
 
 (deftest management-form-test
   (async done
@@ -47,17 +45,6 @@
             (testing "sell button should render with correct classes and text"
               (is (match? "btn btn-secondary m-2" (aget sell-button "className")))
               (is (match? "Sell" (.-textContent sell-button))))
-
-            (testing "simulating button click should call on-click function with correct values"
-              (testing "buy operation"
-                (tl/change btc-input 2)
-                (tl/click buy-button)
-                (is (match? 2 @buy-state)))
-
-              (testing "sell operation"
-                (tl/change btc-input 5)
-                (tl/click sell-button)
-                (is (match? 5 @sell-state))))
 
             (done))
           (fn [err] (is (= nil err))

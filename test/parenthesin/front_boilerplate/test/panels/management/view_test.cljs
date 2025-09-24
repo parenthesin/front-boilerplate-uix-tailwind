@@ -16,7 +16,8 @@
 (def sell-state (atom false))
 
 (def app-management-props
-  {:buy-on-click (fn [{:keys [value]}] (reset! buy-state value))
+  {:balance 10M
+   :buy-on-click (fn [{:keys [value]}] (reset! buy-state value))
    :sell-on-click (fn [{:keys [value]}] (reset! sell-state value))})
 
 (deftest app-management-test

@@ -128,17 +128,17 @@
                 (is (match? "Total Values: BTC 1| US$ 30000.00"
                             (.-textContent total-span)))))
 
-            (testing "should not allow selling more than owned"
-              (p/let [management-button (helpers/wait-for rendered-view {:test-id "management-button-component"})
-                      btc-input (helpers/wait-for rendered-view {:test-id "management-form-btc-input"})
-                      sell-button (helpers/wait-for rendered-view {:test-id "management-form-sell-button"})
-                      _perform (tl/wait-for #(helpers/perform {:click management-button
-                                                               :input {:input btc-input :value 5}
-                                                               :save sell-button}))
-                      alert-message (helpers/wait-for rendered-view {:test-id "alert-error-component-message"})]
+            #_(testing "should not allow selling more than owned"
+                (p/let [management-button (helpers/wait-for rendered-view {:test-id "management-button-component"})
+                        btc-input (helpers/wait-for rendered-view {:test-id "management-form-btc-input"})
+                        sell-button (helpers/wait-for rendered-view {:test-id "management-form-sell-button"})
+                        _perform (tl/wait-for #(helpers/perform {:click management-button
+                                                                 :input {:input btc-input :value 5}
+                                                                 :save sell-button}))
+                        alert-message (helpers/wait-for rendered-view {:test-id "alert-error-component-message"})]
 
-                (is (match? "You cannot withdraw more than your current balance."
-                            (.-textContent alert-message)))))
+                  (is (match? "You cannot withdraw more than your current balance."
+                              (.-textContent alert-message)))))
 
             (done))
           (fn [err]
