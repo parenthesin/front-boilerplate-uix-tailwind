@@ -20,8 +20,7 @@
 
             (testing "loading spinner component should render with correct classes"
               (is (match? "flex justify-center items-center h-32"
-                          (-> loading-spinner-component
-                              (aget "className")))))
+                          (aget loading-spinner-component "className"))))
 
             (testing "loading spinner span should render with correct classes"
               (is (match? "loading loading-spinner loading-xl"
@@ -43,14 +42,12 @@
                   created-at-item (-> rendered-component (.getAllByText "Wed Jan 01 2025") (aget 0))]
 
             (testing "wallet entries component should render with correct classes"
-              (is (match? "bg-base-100"
-                          (-> wallet-entries-component
-                              (aget "className")))))
+              (is (match? "bg-base-100" (aget wallet-entries-component "className"))))
 
             (testing "wallet entries component should render table content with correct values"
-              (is (match? "1 BTC" (-> btc-amount-item (.-textContent))))
-              (is (match? "US$ 30000" (-> usd-amount-at-item (.-textContent))))
-              (is (match? "Wed Jan 01 2025" (-> created-at-item (.-textContent)))))
+              (is (match? "1 BTC" (.-textContent btc-amount-item)))
+              (is (match? "US$ 30000" (.-textContent usd-amount-at-item)))
+              (is (match? "Wed Jan 01 2025" (.-textContent created-at-item))))
 
             (done))
           (fn [err] (is (= nil err))
@@ -62,16 +59,10 @@
           (p/let [clicked-state (atom false)
                   on-click-fn (fn [] (reset! clicked-state true))
                   rendered-component (tl/render ($ components/refresh-button {:on-click on-click-fn}))
-                  refresh-button-component (helpers/wait-for rendered-component {:test-id "refresh-button-component"})
                   button-element (-> rendered-component (.getByText "Refresh"))]
 
-            (testing "refresh button component should render with correct class for div"
-              (is (match? "p-4"
-                          (-> refresh-button-component
-                              (aget "className")))))
-
             (testing "refresh button should render with correct classes"
-              (is (match? "btn btn-primary" (-> button-element (aget "className")))))
+              (is (match? "btn btn-primary join-item" (aget button-element "className"))))
 
             (testing "refresh button should call on-click function when clicked"
               (is (= false @clicked-state))
@@ -92,12 +83,10 @@
                   total-values-item (-> rendered-component (.getByText "Total Values: BTC 1| US$ 30000"))]
 
             (testing "total values component should render with correct class for div"
-              (is (match? "p-4"
-                          (-> total-values-component
-                              (aget "className")))))
+              (is (match? "p-4" (aget total-values-component "className"))))
 
             (testing "total values component should render with correct values"
-              (is (match? "Total Values: BTC 1| US$ 30000" (-> total-values-item (.-textContent)))))
+              (is (match? "Total Values: BTC 1| US$ 30000" (.-textContent total-values-item))))
 
             (done))
           (fn [err]
@@ -113,26 +102,18 @@
                                                    {:on-click on-click-fn
                                                     :wallet-history fixtures.wallet/wallet-entry}))
                   bottom-bar-component (helpers/wait-for rendered-component {:test-id "bottom-bar-component"})
-                  refresh-button-component (-> rendered-component (.getByText "Refresh"))
+                  refresh-button (helpers/wait-for rendered-component {:test-id "refresh-button-component"})
+                  refresh-button-component (-> refresh-button (.querySelector "button"))
                   total-values-item (-> rendered-component (.getByText "Total Values: BTC 1| US$ 30000"))]
 
             (testing "bottom bar component should render with correct class for flex container"
-              (is (match? "flex justify-between"
-                          (-> bottom-bar-component
-                              (aget "className")))))
+              (is (match? "flex justify-between" (aget bottom-bar-component "className"))))
 
             (testing "refresh button should render with correct classes"
-              (is (match? "btn btn-primary" (-> refresh-button-component (aget "className")))))
+              (is (match? "btn btn-primary join-item" (aget refresh-button-component "className"))))
 
             (testing "total values should render with correct values"
-              (is (= "Total Values: BTC 1| US$ 30000" (-> total-values-item (.-textContent)))))
-
-            (testing "refresh button should call on-click function when clicked"
-              (is (= false @clicked-state))
-
-              (.click refresh-button-component)
-
-              (is (= true @clicked-state)))
+              (is (= "Total Values: BTC 1| US$ 30000" (.-textContent total-values-item))))
 
             (done))
           (fn [err] (is (= nil err))

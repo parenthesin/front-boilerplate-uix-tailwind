@@ -13,8 +13,11 @@
 (defscene magnifying-glass
   ($ components/magnifying-glass))
 
-(defscene parenthesin-icon
-  ($ components/parenthesin))
+(defscene parenthesin-icon-dark-mode
+  ($ components/parenthesin {:dark-mode true}))
+
+(defscene parenthesin-icon-light-mode
+  ($ components/parenthesin {:dark-mode false}))
 
 (defscene error-icon
   ($ components/error))

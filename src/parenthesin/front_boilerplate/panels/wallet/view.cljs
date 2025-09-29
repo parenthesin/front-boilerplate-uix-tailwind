@@ -2,11 +2,14 @@
   (:require
    [parenthesin.front-boilerplate.components.alert :as components.alert]
    [parenthesin.front-boilerplate.infra.system.state :as system.state]
+   [parenthesin.front-boilerplate.panels.management.view :refer [app-management]]
    [parenthesin.front-boilerplate.panels.wallet.components :refer [bottom-bar
                                                                    loading-spinner
                                                                    wallet-entries]]
    [parenthesin.front-boilerplate.panels.wallet.state :refer [db
-                                                              get-wallet-history]]
+                                                              get-wallet-history
+                                                              wallet-deposit
+                                                              wallet-withdrawal]]
    [uix.core :as uix :refer [$ defui]]
    [uix.dom]))
 
@@ -15,7 +18,7 @@
         {:keys [result error loading]} (uix/use-atom db)]
     (uix/use-effect
      #(get-wallet-history config)
-     [])
+     [config])
     ($ :div {:className "px-6 py-10"
              :data-testid "app-wallet-view"}
        (if error
@@ -27,5 +30,9 @@
               ($ loading-spinner)
               ($ :<>
                  ($ wallet-entries result)
-                 ($ bottom-bar {:on-click #(get-wallet-history config)
-                                :wallet-history result}))))))))
+                 ($ bottom-bar {:refresh-on-click #(get-wallet-history config)
+                                :management-on-click #(.showModal (js/document.getElementById "management-modal"))
+                                :wallet-history result})))
+            ($ app-management {:balance (:total-btc result)
+                               :buy-on-click (partial wallet-deposit config)
+                               :sell-on-click (partial wallet-withdrawal config)}))))))
