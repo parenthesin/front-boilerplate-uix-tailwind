@@ -34,7 +34,8 @@
                   management-form-component (helpers/wait-for rendered-view {:test-id "management-form-component"})
                   btc-input (helpers/wait-for rendered-view {:test-id "management-form-btc-input"})
                   buy-button (helpers/wait-for rendered-view {:test-id "management-form-buy-button"})
-                  sell-button (helpers/wait-for rendered-view {:test-id "management-form-sell-button"})]
+                  sell-button (helpers/wait-for rendered-view {:test-id "management-form-sell-button"})
+                  form-error (helpers/wait-for rendered-view {:test-id "management-form-error"})]
 
             (testing "app management view should render with correct structure"
               (is (match? "H3" (-> title-element .-tagName)))
@@ -50,6 +51,10 @@
                 (tl/change btc-input 5)
                 (tl/click sell-button)
                 (is (match? 5 @sell-state))))
+
+            (testing "should not allow selling more than owned"
+              (tl/change btc-input 100)
+              (is (match? "Your total balance is ₿ 10" (.-textContent form-error))))
 
             (done))
           (fn [err]

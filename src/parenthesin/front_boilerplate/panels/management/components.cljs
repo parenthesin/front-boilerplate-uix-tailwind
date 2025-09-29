@@ -20,7 +20,8 @@
                            :onChange on-change})
                 ($ :label "BTC")))
 
-          ($ :p {:className "label mx-2 w-full text-xs text-error"}
+          ($ :p {:className "label mx-2 w-full text-xs text-error"
+                 :data-testid "management-form-error"}
              (when has-balance? (str "Your total balance is ₿ " balance))))
        ($ :.flex
           ($ :label.m-2.w-full.text-right
