@@ -33,7 +33,7 @@ npm run release
 ![Management form with a value of 1 on it input field](docs/management_form_with_value.png)
 
 ### Management form with a validation error
-![Management form with an error showed after a balance validation](docs/managemnt_form_with_error.png)
+![Management form with an error showed after a balance validation](docs/management_form_with_error.png)
 > This error will happen when we try to sell more than we own.
 
 ## Structure
