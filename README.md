@@ -17,6 +17,9 @@ npm test
 npm run release
 ```
 
+### Backend server
+This application expects that you've a backend server running, as this boilerplate was designed specially for [microservice-boilerplate](https://github.com/parenthesin/microservice-boilerplate), so make sure you have it running as well.
+
 ## Screenshots
 
 ### Home
